@@ -1,6 +1,10 @@
 import puppeteer from "puppeteer";
 import getLocalCookies from "./getLocalCookies";
 
+/**
+ * Retrieves class schedule data from the elearning website.
+ * @returns A Promise that resolves to an array of class schedule data.
+ */
 export default async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
