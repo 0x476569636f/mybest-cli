@@ -16,7 +16,7 @@ This project was created using `bun init` in bun v1.1.24. [Bun](https://bun.sh) 
 
 # Todo
 
--Export data class schedule to json
--Add loading animation
--Auto absen using node-cron
--Implementing better algorithm
+- Export data class schedule to json
+- Add loading animation
+- Auto absen using node-cron
+- Implementing better algorithm
