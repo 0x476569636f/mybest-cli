@@ -11,7 +11,7 @@ export default async (): Promise<boolean> => {
     const page = await browser.newPage();
     await page.setCookie(...cookies);
     await page.goto("https://elearning.bsi.ac.id/user/dashboard", {
-      timeout: 5000,
+      timeout: 10000,
     });
 
     const accountSettings = await page.$(".account-settings");
