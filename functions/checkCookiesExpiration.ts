@@ -7,9 +7,9 @@ import getLocalCookies from "./getLocalCookies";
 export default async (): Promise<boolean> => {
   try {
     const cookies = await getLocalCookies();
-    const now = Date.now();
+    const now = Math.floor(Date.now() / 1000);
     const expired = cookies.some(
-      (cookie: { expiry: number }) => cookie.expiry < now
+      (cookie: { expires: number }) => cookie.expires < now
     );
     return expired;
   } catch (error) {
