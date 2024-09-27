@@ -13,15 +13,28 @@ export default async (link: string) => {
   const page = await browser.newPage();
   await page.setCookie(...cookies);
   await page.goto(link, {
-    waitUntil: "domcontentloaded",
+    waitUntil: "networkidle0",
   });
 
   try {
-    await page.waitForSelector(".info-tiles");
-    await page.click(".info-tiles button");
-  } catch (error) {
-    throw new Error("Gagal melakukan absen");
-  }
+    const formButton = await page.$(
+      "form[action='/mhs-absen'] button[type='submit']"
+    );
 
-  await browser.close();
+    if (!formButton) {
+      throw new Error("Absen belum dibuka");
+    }
+
+    await page.evaluate((button) => button.click(), formButton);
+    await page.waitForNavigation();
+    const commentForm = await page.$("form[action='/komentar-mhs']");
+    if (commentForm) {
+      console.log("Absen berhasil");
+    }
+  } catch (error) {
+    console.error("Error during attendance:", error);
+    throw new Error("Gagal melakukan absen");
+  } finally {
+    await browser.close();
+  }
 };
